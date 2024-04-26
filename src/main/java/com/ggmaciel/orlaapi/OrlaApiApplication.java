@@ -18,4 +18,13 @@ public class OrlaApiApplication {
         SpringApplication.run(OrlaApiApplication.class, args);
     }
 
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder
+                .setSslBundle(SslBundle.of(SslStoreBundle.NONE))
+                .setConnectTimeout(Duration.ofSeconds(30))
+                .setReadTimeout(Duration.ofSeconds(30))
+                .build();
+    }
+
 }
