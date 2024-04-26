@@ -45,7 +45,7 @@ class FilmServiceTest {
 			should update just a description
 			""")
     @Test
-    public void shouldUpdateFilm() {
+    void shouldUpdateFilm() {
         var requestDto = FilmDto.builder().openingCrawl("new description").build();
         assertEquals("first description", filmDataLoader.getFilms().get(4).getOpeningCrawl());
         assertEquals(1, filmDataLoader.getFilms().get(4).getVersion());
@@ -63,7 +63,7 @@ class FilmServiceTest {
 			when update film
 			should return not found exception
 			""")
-    public void shouldNotFoundException() {
+    void shouldNotFoundException() {
         var message = Assertions.assertThrows(NotFoundException.class, () -> {
             var requestDto = FilmDto.builder().openingCrawl("new description").build();
             filmService.updateFilm(100, requestDto);
@@ -77,7 +77,7 @@ class FilmServiceTest {
 			should return data of film
 			""")
     @Test
-    public void shouldShowDetailsFilm() {
+    void shouldShowDetailsFilm() {
         var film = filmService.showFilm(4);
 
         assertEquals("Title test", film.getTitle());
@@ -92,10 +92,37 @@ class FilmServiceTest {
 			should return not found exception
 			""")
     @Test
-    public void shouldException() {
+    void shouldException() {
         var message = Assertions.assertThrows(NotFoundException.class, () -> {
             filmService.showFilm(100);
         });
         assertEquals("Film not found", message.getMessage());
+    }
+
+    @DisplayName(
+            """
+            given finding films
+            when saga id is null
+            should return all films
+            """
+    )
+    @Test
+    void shouldReturnAllFilms() {
+        var films = filmService.findFilms(null);
+        assertEquals(1, films.size());
+    }
+
+    @DisplayName(
+            """
+            given finding films
+            when saga id is 4
+            should return all films with episode id 4
+            """
+    )
+    @Test
+    void shouldReturnAllFilmsWithEpisodeId4() {
+        var films = filmService.findFilms(4);
+        assertEquals(1, films.size());
+        assertEquals(4, films.getFirst().getEpisodeId());
     }
 }

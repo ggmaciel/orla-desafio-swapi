@@ -45,7 +45,7 @@ class FilmControllerTest extends IntegrationTestBase {
 			should update just a description
 			""")
     @Test
-    public void shouldUpdateFilm() {
+    void shouldUpdateFilm() {
         var request = """
 				{
 				"opening_crawl": "new description"
@@ -70,7 +70,7 @@ class FilmControllerTest extends IntegrationTestBase {
 			should return status code not found
 			""")
     @Test
-    public void shouldStatusCodeNotFound() {
+    void shouldStatusCodeNotFound() {
         var request = """
 				{
 				"opening_crawl": "new description"
@@ -93,7 +93,7 @@ class FilmControllerTest extends IntegrationTestBase {
 			should return data of film
 			""")
     @Test
-    public void shouldShowFilm() {
+    void shouldShowFilm() {
         var response = RestAssured.given()
                 .contentType("application/json")
                 .get(url("/v1/films/4"))
@@ -113,7 +113,7 @@ class FilmControllerTest extends IntegrationTestBase {
 			should return status code 404
 			""")
     @Test
-    public void shouldReturnFilmNotFound() {
+    void shouldReturnFilmNotFound() {
         var response = RestAssured.given()
                 .contentType("application/json")
                 .get(url("/v1/films/10000"))
@@ -128,7 +128,7 @@ class FilmControllerTest extends IntegrationTestBase {
 			should return all films
 			""")
     @Test
-    public void shouldReturnAllFilms() {
+    void shouldReturnAllFilms() {
         var response = RestAssured.given()
                 .contentType("application/json")
                 .get(url("/v1/films"))
@@ -150,7 +150,7 @@ class FilmControllerTest extends IntegrationTestBase {
 			should return all films filtered by saga
 			""")
     @Test
-    public void shouldReturnAllFilmsBySagaId() {
+    void shouldReturnAllFilmsBySagaId() {
         var response = RestAssured.given()
                 .contentType("application/json")
                 .get(url("/v1/films?saga_id=4"))

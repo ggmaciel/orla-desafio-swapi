@@ -42,7 +42,7 @@ class FilmDataLoaderIntegrationTest extends IntegrationTestBase {
 			when startup application
 			should load all films in memory
 			""")
-    public void givenStarWarsApiShouldLoadAllFilms() throws IOException {
+    void givenStarWarsApiShouldLoadAllFilms() throws IOException {
 
         var responseMock = jsonTestKit.jsonValue("mocks/films.json");
 
